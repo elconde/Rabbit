@@ -2,6 +2,7 @@
 import pika
 import acm
 import FLogger
+import traceback
 logger = FLogger.FLogger(__name__,level=2)
 
 def ATSCallback(command):
@@ -10,7 +11,10 @@ def ATSCallback(command):
     
 def on_request(ch, method, props, command):
     logger.LOG('Received %s',command)
-    exec('response = %s' % (command,))
+    try:
+        exec('response = %s' % (command,))
+    except:
+        response = traceback.format_exc()
     logger.DLOG('response %s',response)
 
     ch.basic_publish(
