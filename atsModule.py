@@ -29,4 +29,4 @@ def work():
     return
 
 def callback(ch,method,properties,body):
-    logger.DLOG('Received %r %r %r %r',ch,method,properties,body)
+    logger.DLOG('Received %r',body)
